@@ -1,0 +1,157 @@
+/* General task item styling */
+.task-item {
+    
+    margin-bottom: 20px;  /* Increased bottom margin */
+    border-bottom: 1px solid #ddd;  /* Slightly lighter border for a softer look */
+    padding-bottom: 15px;
+    background-color: #f9f9f9;  /* Light background to separate tasks visually */
+    border-radius: 8px;  /* Rounded corners for a more modern look */
+    transition: background-color 0.3s ease;  /* Smooth background transition on hover */
+}
+
+.task-item:hover {
+    background-color: #f1f1f1;  /* Light gray background when hovered */
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Task title and due date container */
+.task-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;  /* Darker color for better readability */
+}
+
+.due-date {
+    font-style: italic;
+    color: #888;
+}
+
+/* Task description styling */
+.task-description {
+    margin-top: 10px;  /* More spacing between title and description */
+    font-size: 16px;  /* Slightly larger font size */
+    color: #666;
+    line-height: 1.5;  /* Better line spacing for easier reading */
+}
+
+/* Modal styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);  /* Darker overlay for better contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;  /* Increased padding for more spacious content */
+    border-radius: 10px;
+    max-width: 600px;  /* Slightly wider modal */
+    width: 90%;  /* Make sure it looks good on smaller screens */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 26px;  /* Larger font size for better visibility */
+    text-align: center;
+    color: #333;
+}
+
+/* Form fields in the modal */
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;  /* Increased padding for comfort */
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;  /* Prevents padding from affecting width */
+}
+
+.modal-content textarea {
+    height: 120px;  /* Slightly taller textarea for more space */
+    resize: vertical;
+}
+
+/* Modal buttons container */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Button styling */
+.modal-buttons button {
+    padding: 12px 25px;  /* Larger buttons for better user interaction */
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;  /* Smooth color transition on hover */
+}
+
+.modal-buttons button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-buttons button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-buttons button:hover {
+    opacity: 0.9;  /* Slight opacity change for hover effect */
+}
+
+/* Add spacing around the entire app */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;  /* Soft background color for the page */
+    color: #333;
+}
+
+/* Main content container for tasks */
+.main-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+.add-task-button {
+    position: fixed;
+    bottom: 20px;  /* Position it 20px from the bottom of the screen */
+    right: 20px;   /* Position it 20px from the right side */
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #4CAF50;  /* Green button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 9999;  /* Ensure it stays on top of other elements */
+}
+
+.add-task-button:hover {
+    opacity: 0.9;  /* Add hover effect */
+}
