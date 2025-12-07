@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
+require(".env").config();
 
 const app = express();
 app.use(cors());
@@ -10,11 +11,12 @@ app.use(bodyParser.json());
 
 // MySQL connection
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root", // Replace with your username
-    password: "root", // Replace with your password
-    database: "todoproject" // Replace with your database name
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
+
 
 db.connect((err) => {
     if (err) {
@@ -23,6 +25,7 @@ db.connect((err) => {
     }
     console.log("Connected to the MySQL database.");
 });
+
 
 // API route to create a user account
 app.post("/create-account", async (req, res) => {
@@ -54,8 +57,11 @@ app.post("/create-account", async (req, res) => {
         res.status(500).json({ error: "Internal server error." });
     }
 });
+app.get("/health", (req, res) => {
+    res.send("Backend is running");
+});
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
