@@ -1,14 +1,18 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import axios from "axios";
-import Main from "./main";  // Assuming you have a Main component to import
+import {Link}from 'react-router-dom';
+import './signup.css';
 
-const Login = () => {
+const API_URL = process.env.REACT_APP_API_URL;
+
+
+const Signup = () => {
     const [formData, setFormData] = useState({
+        username: "",
         email: "",
         password: "",
     });
     const [message, setMessage] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false);  // Added state to track login status
 
     const handleChange = (e) => {
         setFormData({
@@ -20,27 +24,25 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/login", formData);
+            const response = await axios.post(`${API_URL}/create-account`, formData);
             setMessage(response.data.message);
-            localStorage.setItem("token", response.data.token);  // Save token in localStorage
-            localStorage.setItem("username", response.data.username);  // Save username
-
-
-            setLoggedIn(true);  // Set logged in to true when login is successful
         } catch (error) {
             setMessage(error.response?.data?.error || "Something went wrong!");
         }
     };
 
-    // Render the Main component if logged in, otherwise show the login form
-    if (loggedIn) {
-        return <Main email={formData.email} />;  // Passing the email as a prop to Main
-    }
-
     return (
         <div>
-            <h1>Login</h1>
+            <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                />
                 <input
                     type="email"
                     name="email"
@@ -57,11 +59,13 @@ const Login = () => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">Login</button>
+                <button type="submit">Create Account</button>
+                <Link to='/login'>login</Link>
             </form>
             {message && <p>{message}</p>}
+            
         </div>
     );
 };
 
-export default Login;
+export default Signup;

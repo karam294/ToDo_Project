@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from './header';
 import './main.css';
 import Modal from './modal';   
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Main = ({ email }) => {
     const [userInfo, setUserInfo] = useState(null);  // User info (id, username, etc.)
@@ -22,7 +23,7 @@ const Main = ({ email }) => {
 
     try {
         // Sending the new task to the backend
-        await axios.post('http://localhost:5000/addTask', {
+        await axios.post(`${API_URL}/addTask`, {
             user_id: userInfo.id,  // Send the user ID along with the task data
             title: title.value,
             description: description.value,
@@ -32,7 +33,7 @@ const Main = ({ email }) => {
         // After successful task creation, close the modal and fetch tasks again
         closeModal();
         // Optionally, refresh the tasks list
-        const response = await axios.get(`http://localhost:5000/getTasks?userId=${userInfo.id}`);
+        const response = await axios.get(`${API_URL}/getTasks?userId=${userInfo.id}`);
         setTasks(response.data);
     } catch (error) {
         console.error("Error adding task:", error);
@@ -44,11 +45,11 @@ const Main = ({ email }) => {
         const fetchUserInfo = async () => {
             try {
                 // Fetch user info based on the email
-                const response = await axios.get(`http://localhost:5000/getUserInfo?email=${email}`);
+                const response = await axios.get(`${API_URL}/getUserInfo?email=${email}`);
                 setUserInfo(response.data);  // Set user data (id, username, email)
 
                 // After user info is fetched, fetch tasks
-                const tasksResponse = await axios.get(`http://localhost:5000/getTasks?userId=${response.data.id}`);
+                const tasksResponse = await axios.get(`${API_URL}/getTasks?userId=${response.data.id}`);
                 setTasks(tasksResponse.data);  // Set tasks data
             } catch (error) {
                 console.error("Error fetching user info or tasks:", error);
@@ -63,7 +64,7 @@ const Main = ({ email }) => {
  const handleDelete = async (taskId) => {
   try {
       // Send request to delete task
-      await axios.delete(`http://localhost:5000/deleteTask/${taskId}`);
+      await axios.delete(`${API_URL}/deleteTask/${taskId}`);
 
       // After deletion, remove the task from the state
       setTasks(tasks.filter(task => task.id !== taskId));  // Filter out the deleted task

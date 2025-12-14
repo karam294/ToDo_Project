@@ -1,8 +1,8 @@
 import React from "react";
-import Signup from "./frontend/signup";
-import Login from "./frontend/login";
-import Main from "./frontend/main";
-import Dictionnary from "./frontend/Dictionnary"
+import Signup from "./signup";
+import Login from "./login";
+import Main from "./main";
+import Dictionnary from "./Dictionnary"
 import { Routes, Route } from 'react-router-dom';
 
 
